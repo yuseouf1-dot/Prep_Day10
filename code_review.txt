@@ -1,0 +1,77 @@
+========================================
+BOOTCAMP RETROSPECTIVE
+========================================
+
+[ TOP 3 :  3 top-notch tips ]
+
+1. Separation of Frontend and Backend 
+   > I learned that UI (Pygame) and core logic (hangman.py) must be strictly separated. 
+   By removing input() and print() from the play_game function and turning it into a pure logic function, I could reuse the exact same backend for both CLI and GUI versions.
+
+2. Algorithmic Grid Layout 
+   > Instead of hardcoding the x and y coordinates for 26 alphabet buttons, I used 'enumerate' with simple division and modulo operators (i // 13, i % 13) to automatically generate a perfect 2x13 grid. 
+   It made the code extremely modular and clean.
+
+3. Understanding the Real-time Event Loop 
+   > I realized the fundamental difference between a turn-based CLI (which stops and waits for input) and a real-time GUI (which runs a 60fps while-loop). 
+   Handling 'MOUSEBUTTONDOWN' events without freezing the screen was a major breakthrough.
+
+----------------------------------------
+
+[ WORST 3 :  3 lamest points ]
+
+1. The Infinite Loop Trap 
+   > I mistakenly put the 'create_buttons()' initialization inside the main Pygame 'while running' loop. 
+   My button clicks were being reset to 'False' every millisecond, making the game seem unresponsive until I moved the setup outside the loop.
+
+2. The Black Screen of Death 
+   > I struggled with rendering issues where the screen went completely black. 
+   I learned the hard way that missing 'screen.fill()' or messing up the Python indentation for drawing functions breaks the entire visual output.
+
+3. Argument and Variable Name Mismatches 
+   > When connecting the GUI to the backend logic, I faced NameErrors and TypeErrors because the number of arguments didn't match (sending 5 arguments to a function that expected 1) and variables like 'guessed_letter' vs 'clicked_letter' were mixed up.
+
+
+========================================
+
+
+========================================
+[ CODING BEST PRACTICES & GUIDELINES ]
+The Core Rules for Our Developer Team -
+========================================
+
+1.Name is everything
+    Code readability starts with how you name your variables and functions.
+    Meaningless names like 'x', 'y', 'data', or 'temp' are strictly forbidden.
+    Make the purpose obvious to anyone reading it.
+    (O) clicked_letter, secret_word, calculate_score()
+    (X) a, b, word, func1()
+
+2.Keep It DRY (Don't Repeat Yourself)
+    If you find yourself writing the exact same logic twice, extract it into a reusable function immediately.
+    Copy-pasting code (Ctrl+C, Ctrl+V) is the gateway to maintenance hell.
+
+3.One Function, One Job (Single Responsibility)
+    A function should do exactly one thing and do it well.
+    Never mix backend calculations (data processing) with frontend UI (rendering on screen) within the same function. 
+    This strict separation guarantees that your code can be reused across different projects.
+
+4.Trust No Input (Defensive Programming)
+    Users are unpredictable and will not act the way you expect.
+    If you ask for a number, they will type a word. 
+    If you ask for a letter, they will hit Enter on a blank space. 
+    Always use input validation and error handling (try-except) to prevent the program from crashing.
+
+5.Comment the 'WHY', Not the 'WHAT'
+    The code itself should explain 'WHAT' it is doing (thanks to good naming conventions).
+    Your comments should explain 'WHY' it was written that way—the hidden intent, the workaround, or the business logic behind it.
+
+[ Self-Reflection: Do I always comply with these rules? ]
+
+Honest Confession:
+During the early stages of the project, I was so focused on making things work quickly that I occasionally used lazy variable names (like btn) and copy-pasted loops. 
+I also completely failed to anticipate that a user might submit an empty string in the terminal, which led to crashes. 
+Writing this guideline reminded me that building a solid structure and practicing defensive programming is just as important as getting the code to run.
+
+========================================
+
